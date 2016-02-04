@@ -1,13 +1,14 @@
 NAME = 452158872079.dkr.ecr.us-east-1.amazonaws.com/mage
 VERSION = 0.1.70
+MVN_VERSION = 3.3.3-jdk-8
 
 .PHONY: all build release
 
 all: build
 
 build:	
-	docker pull maven:3.3.3-jdk-8
-	docker run -it  -v $(shell pwd):/usr/src/mymaven -w /usr/src/mymaven maven:3.3.3-jdk-8  mvn clean package -DskipTests=true
+	docker pull maven:$(MVN_VERSION)
+	docker run -it  -v $(shell pwd):/usr/src/mymaven -w /usr/src/mymaven maven:$(MVN_VERSION)  mvn clean package -DskipTests=true
 	docker build -t $(NAME):$(VERSION) .
 
 release: 
