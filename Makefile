@@ -7,7 +7,7 @@ all: build
 
 build:	
 	docker pull maven:3.3.3-jdk-8
-	docker run maven:3.3.3-jdk-8 mvn clean package -DskipTests=true
+	docker run -it  -v $(shell pwd):/usr/src/mymaven -w /usr/src/mymaven maven:3.3.3-jdk-8  mvn clean package -DskipTests=true
 	docker build -t $(NAME):$(VERSION) .
 
 release: 
