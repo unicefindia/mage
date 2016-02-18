@@ -72,7 +72,7 @@ redis:
     database: ${REDIS_DATABASE}
 
 temba:
-    apiUrl: https://${TEMBA_HOST}/api/v1
+    apiUrl: ${TEMBA_HOST}
     authToken: ${TEMBA_AUTH_TOKEN}
 
 twitter:
