@@ -15,8 +15,7 @@ build:
 	docker run -i  -v "$(shell pwd):/usr/src/mymaven" -w /usr/src/mymaven maven:$(MVN_VERSION)  mvn clean package -DskipTests=true
 
 build_docker:
-	docker build -t $(REGISTRY)/$(IMAGE):$(BUILD_NUMBER) .
-
+	docker build -f docker/Dockerfile -t $(REGISTRY)/$(IMAGE):$(BUILD_NUMBER) .
 release:
 	@if ! docker images $(REGISTRY)/$(IMAGE) | awk '{ print $$2 }' | grep -q -F $(BUILD_NUMBER); then echo "$(REGISTRY)/$(IMAGE) version $(BUILD_NUMBER) is not yet built. Please run 'make build'"; false; fi
 	docker push $(REGISTRY)/$(IMAGE):$(BUILD_NUMBER)
